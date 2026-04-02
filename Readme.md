@@ -123,11 +123,11 @@ GET /records?Type=expense&Category=food&startDate=2026-01-01&endDate=2026-03-01
 │   ├── authentication.js
 │   └── authorize.js
 ├── model/
-│   ├── user.js
-│   └── records.js
+│   ├── records.js
+│   └── user.js
 ├── routes/
-│   ├── auth.js
-│   └── admin.js
+│   ├── admin.js
+│   └── user.js
 ├── index.js
 └── package.json
 ```
@@ -139,7 +139,7 @@ GET /records?Type=expense&Category=food&startDate=2026-01-01&endDate=2026-03-01
 ### 1. Clone repo
 
 ```bash
-git clone <repo-url>
+git clone "https://github.com/sidd19898/Finance-Data-Processing-and-Access-Control-Backend"
 cd project-folder
 ```
 
@@ -169,32 +169,32 @@ node index.js
 
 ### 🔐 Auth
 
-* `POST /signup`
-* `POST /signin`
+* `POST /api/user/signup`
+* `POST /api/user/signin`
 
 ---
 
 ### 👤 Users (Admin)
 
-* `GET /read/user`
-* `POST /create/user`
-* `PUT /update/user/:id`
-* `DELETE /delete/user/:id`
+* `GET /api/rolemod/read/user`
+* `POST /api/rolemod/create/user`
+* `PUT /api/rolemod/update/user/:id`
+* `DELETE /api/rolemod/delete/user/:id`
 
 ---
 
 ### 💰 Records
 
-* `GET /records` → all roles
-* `POST /create/records` → admin
-* `PUT /update/records/:id` → admin
-* `DELETE /delete/records/:id` → admin
+* `GET /api/rolemod/records` → all roles
+* `POST /api/rolemod/create/records` → admin
+* `PUT /api/rolemod/update/records/:id` → admin
+* `DELETE /api/rolemod/delete/records/:id` → admin
 
 ---
 
 ### 📊 Dashboard
 
-* `GET /dashboard/summary` → analyst, admin
+* `GET /api/rolemod/dashboard/summary` → analyst, admin
 
 ---
 
@@ -214,24 +214,9 @@ Authorization: Bearer <your_token>
 
 * MongoDB is **case-sensitive**
 
-  * Use: `Amount`, `Type`, `Category`, `Date`
+  * Use: `Amount`, `Type`, `Category`, `Date` in params while testing filtering get /api/rolemod/records
 * Date must be stored as **Date type (ISODate)** for aggregation
 * Insert records via API to ensure proper type conversion
-
----
-
-## 📌 Example Record
-
-```json
-{
-  "amount": 100,
-  "type": "expense",
-  "category": "food",
-  "description": "Lunch"
-}
-```
-
----
 
 ## ⚠️ Known Limitations
 
