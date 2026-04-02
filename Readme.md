@@ -32,36 +32,63 @@ It allows:
 
 ---
 
-## 👥 User Roles & Default Behavior
+## 🌐 Deployed API Usage (Important)
 
-* Every user is **assigned the role `viewer` by default** during signup.
-* This ensures restricted access and improves security.
+When using the deployed backend (Render): https://finance-data-processing-and-access-hky8.onrender.com/
 
-### 🔄 Role Management
+⚠️ **Do NOT use tokens generated from local server**
 
-* Only **Admin users** can update roles.
-* Admin can change a user's role to:
+### 🔐 Why?
 
-  * `admin`
-  * `analyst`
-  * `viewer`
+JWT tokens are signed using a secret key (`JWT_SECRET`) which may differ between local and deployed environments.
 
-### 🛠️ How it works
+---
 
-* Users sign up → automatically become **viewer**
-* Admin uses the update route:
+### ✅ Correct Steps to Test Deployed APIs
+
+1. **Signup or Signin using deployed API**
+
+```http
+POST https://your-app.onrender.com/signup
+POST https://your-app.onrender.com/signin
+```
+
+2. **Copy the token from response**
+
+3. Use it in headers:
+
+```http
+Authorization: Bearer <TOKEN>
+```
+
+---
+
+### 👥 Role Assignment Note
+
+* All users are created as **viewer by default**
+* To test admin/analyst features:
+
+  * Create a user via deployed API
+  * Update role using admin route:
 
 ```http
 PUT /update/user/:id
 ```
 
-* Request body example:
+---
+
+### ⚠️ Important
+
+* Tokens from local server will result in:
 
 ```json
 {
-  "role": "analyst"
+  "message": "Invalid token"
 }
 ```
+
+* Always generate tokens from the same environment you are testing
+
 
 ### 👥 Role-Based Access Control
 
