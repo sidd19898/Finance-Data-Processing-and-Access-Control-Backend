@@ -49,8 +49,8 @@ JWT tokens are signed using a secret key (`JWT_SECRET`) which may differ between
 1. **Signup or Signin using deployed API**
 
 ```http
-POST https://your-app.onrender.com/signup
-POST https://your-app.onrender.com/signin
+POST https://finance-data-processing-and-access-hky8.onrender.com/signup
+POST https://finance-data-processing-and-access-hky8.onrender.com/signin
 ```
 
 2. **Copy the token from response**
