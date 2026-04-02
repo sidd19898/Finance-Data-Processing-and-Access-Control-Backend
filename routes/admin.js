@@ -31,7 +31,11 @@ const Use = z.object({
     id: z.string().refine(
     (val) => mongoose.Types.ObjectId.isValid(val),
     {message: "Invalid ObjectId"}
-    )
+    ),
+    firstname: z.string(),
+    lastname: z.string(),
+    email: z.string().email(),
+    password: z.string(),
 })
 
 router.put("/update/user/:id", jsonParser,authmiddleware,authorize("admin"),async(req,res)=>{
@@ -46,6 +50,10 @@ router.put("/update/user/:id", jsonParser,authmiddleware,authorize("admin"),asyn
 
     const arr = {
     $set:{
+    firstname : req.body.firstname,
+    lastname : req.body.lastname,                   
+    email : req.body.email,
+    password : req.body.password,
     role:req.body.role,
     }
     };
