@@ -32,6 +32,37 @@ It allows:
 
 ---
 
+## 👥 User Roles & Default Behavior
+
+* Every user is **assigned the role `viewer` by default** during signup.
+* This ensures restricted access and improves security.
+
+### 🔄 Role Management
+
+* Only **Admin users** can update roles.
+* Admin can change a user's role to:
+
+  * `admin`
+  * `analyst`
+  * `viewer`
+
+### 🛠️ How it works
+
+* Users sign up → automatically become **viewer**
+* Admin uses the update route:
+
+```http
+PUT /update/user/:id
+```
+
+* Request body example:
+
+```json
+{
+  "role": "analyst"
+}
+```
+
 ### 👥 Role-Based Access Control
 
 | Role    | Permissions                          |
